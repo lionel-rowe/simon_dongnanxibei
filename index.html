@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>麻将牌指南针</title>
+  <title>Mahjong Compass 麻将牌指南针</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,8 +11,8 @@
   <h1>Mahjong Compass</h1>
 
   <!--TODO (general):
-    - prettify layout (esp. `#infoDisplay`)
-    - create modal dialog box to notify user of win; allow option to continue or restart
+    - prettify layout (esp. `#infoDisplay` and `#overlay`)
+    - sort KaiTi font for android/iOS
   -->
 
   <div id="infoDisplay">
@@ -48,6 +48,15 @@
     <input type="button" value="Start" id="start">
     <label><input type="checkbox" id="strict"> Strict mode</label>
     <label><input type="checkbox" id="sound" checked> Sound</label>
+  </div>
+
+  <div id="overlay" class="hidden">
+    
+    <h1>Congratulations!</h1>
+    <p>You successfully remembered <span id="winningMove"></span> moves.</p>
+    <input type="button" value="Continue" id="continue">
+    <input type="button" value="Restart" id="restart">
+
   </div>
 
   <script type="text/javascript" src="scripts/game.js"></script>

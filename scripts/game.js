@@ -12,13 +12,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
+  const winningMove = 20;
+  document.querySelector('#winningMove').textContent = winningMove;
+
   //logging state: `console.log(`\`state\` at line [line]: ${JSON.stringify(state)}`);
 
+  const audioDong = new Audio('audio/dong.mp3');
+  const audioNan = new Audio('audio/nan.mp3');
+  const audioXi = new Audio('audio/xi.mp3');
+  const audioBei = new Audio('audio/bei.mp3');
+
   const directions = [
-    {letter: 'd', char: '东', audio: 'audio/dong.mp3'}
-    , {letter: 'n', char: '南', audio: 'audio/nan.mp3'}
-    , {letter: 'x', char: '西', audio: 'audio/xi.mp3'}
-    , {letter: 'b', char: '北', audio: 'audio/bei.mp3'}
+    {letter: 'd', char: '东', audio: audioDong}
+    , {letter: 'n', char: '南', audio: audioNan}
+    , {letter: 'x', char: '西', audio: audioXi}
+    , {letter: 'b', char: '北', audio: audioDong}
   ];
 
   //audio files from forvo.com
@@ -36,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
       currentPiece.classList.add('activated');
       if (document.querySelector('#sound').checked) {
-        const audio = new Audio(directions.filter((el) => el.char === char)[0].audio);
+        const audio = directions.filter((el) => el.char === char)[0].audio.cloneNode(true);
         audio.play();
       }
     }, 10);
@@ -103,9 +111,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (state.inProgress) {
       if (char === directions[state.sequence[state.idxToCheck]].char) {
         if (state.idxToCheck === state.sequence.length - 1) {
-          state.userInputAllowed = false;
-          addNewMove();
-          setTimeout(playSequence, 1500);
+          if (state.sequence.length === winningMove) {
+            document.querySelector('#overlay').classList.remove('hidden');
+          } else {
+            continueGame();
+          }
         }
         state.idxToCheck++;
       } else {
@@ -140,6 +150,12 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#moveCounter').textContent = state.sequence.length;
   }
 
+  function continueGame() {
+    state.userInputAllowed = false;
+    addNewMove();
+    setTimeout(playSequence, 1500);
+  }
+
   function strictModeRestart() {
     state.userInputAllowed = false;
     document.querySelector('#statusDisplay').textContent = 'Sorry, that’s the wrong sequence! Game restarted';
@@ -157,6 +173,16 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       turnOff();
     }
+  });
+
+  document.querySelector('#continue').addEventListener('click', function() {
+    document.querySelector('#overlay').classList.add('hidden');
+    continueGame();
+  });
+
+  document.querySelector('#restart').addEventListener('click', function() {
+    document.querySelector('#overlay').classList.add('hidden');
+    start();
   });
 
   state.init();

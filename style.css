@@ -27,7 +27,7 @@ h1 {
 
 .mahjong {
   background: ivory;
-  font-family: "KaiTi";
+  font-family: "楷体", "KaiTi", "标楷体", "Biao KaiTi", "华文楷体", "STKaiti", "楷体_GB2312", "KaiTi_GB2312";
   font-size: 7rem;
   width: 50%;
   height: 50%;
@@ -220,6 +220,7 @@ kbd {
 .gloss {
   position: relative;
   cursor: help;
+  border-bottom: 1px dotted rgba(255,255,255,0.4);
 }
 
 .tooltip {
@@ -243,3 +244,19 @@ kbd {
 .gloss:hover .tooltip {
   display: inline-block;
 }
+
+#overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 1000;
+  padding: 0 8px;
+}
+
+.hidden {
+  display: none;
+}
+
