@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>麻将牌指南针</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+  <h1>Mahjong Compass</h1>
+
+  <!--TODO (general):
+    - prettify layout (esp. `#infoDisplay`)
+    - create modal dialog box to notify user of win; allow option to continue or restart
+  -->
+
+  <div id="infoDisplay">
+    <div id="statusDisplay">Game stopped</div>
+    <div>Move counter:
+      <span id="moveCounter">0</span>
+    </div>
+  </div>
+
+  <div id="instructionWrapper" tabindex="1">
+    <div id="showInstructions" role="button">Shortcut keys</div>
+    <div id="instructions">
+      <ul>
+        <li><kbd>D</kbd> <span class="gloss" data-gloss="dōng (east)" >东</span></li>
+        <li><kbd>N</kbd> <span class="gloss" data-gloss="nán (south)">南</span></li>
+        <li><kbd>X</kbd> <span class="gloss" data-gloss="xī (west)">西</span></li>
+        <li><kbd>B</kbd> <span class="gloss" data-gloss="běi (north)">北</span></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="game">
+      <button class="mahjong right" value="东" tabindex="-1"><span class="btnText">东</span></button>
+      <button class="mahjong bottom" value="南" tabindex="-1"><span class="btnText">南</span></button>
+      <button class="mahjong left" value="西" tabindex="-1"><span class="btnText">西</span></button>  
+      <button class="mahjong top" value="北" tabindex="-1"><span class="btnText">北</span></button>
+    </div>
+  </div>
+
+  <div>
+    <input type="button" value="Start" id="start">
+    <label><input type="checkbox" id="strict"> Strict mode</label>
+    <label><input type="checkbox" id="sound" checked> Sound</label>
+  </div>
+
+  <script type="text/javascript" src="scripts/game.js"></script>
+  <script type="text/javascript" src="scripts/gloss.js"></script>
+</body>
+</html>
