@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     {letter: 'd', char: '东', audio: audioDong}
     , {letter: 'n', char: '南', audio: audioNan}
     , {letter: 'x', char: '西', audio: audioXi}
-    , {letter: 'b', char: '北', audio: audioDong}
+    , {letter: 'b', char: '北', audio: audioBei}
   ];
 
   function activate(char) {
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     pieces.forEach(function(piece) {
       piece.classList.remove('activated');
     });
-        
+
     setTimeout(function() {
       currentPiece.classList.add('activated');
       if (document.querySelector('#sound').checked) {
