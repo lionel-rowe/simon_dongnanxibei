@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const audioXi = new Audio('audio/xi.mp3');
   const audioBei = new Audio('audio/bei.mp3');
 
+  //audio files from forvo.com
+
   const directions = [
     {letter: 'd', char: '东', audio: audioDong}
     , {letter: 'n', char: '南', audio: audioNan}
@@ -29,18 +31,13 @@ document.addEventListener('DOMContentLoaded', function() {
     , {letter: 'b', char: '北', audio: audioDong}
   ];
 
-  //audio files from forvo.com
-
   function activate(char) {
     const pieces = document.querySelectorAll('.mahjong');
     const currentPiece = document.querySelector(`.mahjong[value=${char}]`);
     pieces.forEach(function(piece) {
       piece.classList.remove('activated');
     });
-    // directions.forEach(function(direction) {
-    //   direction.audio.pause();
-    // });
-    
+        
     setTimeout(function() {
       currentPiece.classList.add('activated');
       if (document.querySelector('#sound').checked) {
