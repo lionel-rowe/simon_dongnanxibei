@@ -69,6 +69,10 @@ document.addEventListener('DOMContentLoaded', function() {
       handleUserInput(direction.char);
     }
 
+    if (e.key === 'Escape') {
+      finishSequence();
+    }
+
   });
 
   document.querySelector('.container').addEventListener('scroll', function() {
@@ -95,11 +99,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     document.querySelector('#statusDisplay').textContent = 'Watch carefully...';
     playSequenceTimeouts.push(
-      setTimeout(function() {
-        document.querySelector('#statusDisplay').textContent = 'Now repeat the sequence!';
-        state.userInputAllowed = true;
-      }, 1500 * state.sequence.length)
+      setTimeout(finishSequence, 1500 * state.sequence.length)
     );
+  }
+
+  function finishSequence() {
+    document.querySelector('#statusDisplay').textContent = 'Now repeat the sequence!';
+      playSequenceTimeouts.forEach(function(el) {
+        clearTimeout(el);
+      });
+      playSequenceTimeouts = [];
+      state.userInputAllowed = true;
   }
 
   function handleUserInput(char) {
